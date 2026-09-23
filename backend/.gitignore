@@ -1,0 +1,20 @@
+.env
+__pycache__/
+*.pyc
+venv/
+career_assistant.db
+uploads/
+# Environment variables
+.env
+backend/.env
+
+# Python
+__pycache__/
+*.pyc
+backend/venv/
+
+# Database
+backend/career_assistant.db
+
+# Uploaded resumes
+backend/uploads/
