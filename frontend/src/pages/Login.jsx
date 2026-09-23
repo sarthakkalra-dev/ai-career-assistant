@@ -1,10 +1,10 @@
+```jsx
 import { useState } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
-import { Brain, Mail, Lock, ArrowRight } from "lucide-react"
 import api, { getApiError } from "../lib/api"
+import { Brain, Mail, Lock, ArrowRight } from "lucide-react"
 
 function Login() {
-
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -16,9 +16,7 @@ function Login() {
 
   const registeredMessage = location.state?.registered
 
-
   const handleLogin = async (event) => {
-
     event.preventDefault()
 
     setError("")
@@ -29,46 +27,45 @@ function Login() {
     }
 
     try {
-
       setLoading(true)
 
       const formData = new URLSearchParams()
 
-      formData.append("username", email)
+      formData.append("username", email.trim().toLowerCase())
       formData.append("password", password)
 
-
-      const response = await api.post("/login", formData, {
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      })
-
+      const response = await api.post(
+        "/login",
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        }
+      )
 
       localStorage.setItem(
         "access_token",
         response.data.access_token
       )
 
-
       navigate("/dashboard")
-
     } catch (error) {
-
-      setError(getApiError(error, "Unable to connect to the backend."))
-
+      setError(
+        getApiError(
+          error,
+          "Unable to connect to the backend."
+        )
+      )
     } finally {
-
       setLoading(false)
-
     }
-
   }
-
 
   return (
     <div className="min-h-screen bg-slate-100 flex items-center justify-center p-6">
 
       <div className="w-full max-w-5xl bg-white rounded-3xl shadow-xl overflow-hidden grid md:grid-cols-2">
-
 
         {/* Left Section */}
 
@@ -96,7 +93,6 @@ function Login() {
 
             </div>
 
-
             <div className="mt-20">
 
               <h2 className="text-4xl font-bold leading-tight">
@@ -115,20 +111,17 @@ function Login() {
 
           </div>
 
-
           <p className="text-sm text-indigo-200">
             AI-powered career preparation platform
           </p>
 
         </div>
 
-
         {/* Login Section */}
 
         <div className="p-8 md:p-12">
 
           <div className="max-w-md mx-auto">
-
 
             {/* Mobile Logo */}
 
@@ -152,7 +145,6 @@ function Login() {
 
             </div>
 
-
             <div className="mb-8">
 
               <h2 className="text-3xl font-bold text-slate-900">
@@ -171,7 +163,6 @@ function Login() {
 
             </div>
 
-
             {/* Error */}
 
             {error && (
@@ -182,12 +173,10 @@ function Login() {
 
             )}
 
-
             <form
               onSubmit={handleLogin}
               className="space-y-5"
             >
-
 
               {/* Email */}
 
@@ -218,7 +207,6 @@ function Login() {
 
               </div>
 
-
               {/* Password */}
 
               <div>
@@ -237,7 +225,6 @@ function Login() {
                   </button>
 
                 </div>
-
 
                 <div className="relative">
 
@@ -260,7 +247,6 @@ function Login() {
 
               </div>
 
-
               {/* Login Button */}
 
               <button
@@ -280,22 +266,22 @@ function Login() {
 
               </button>
 
-
             </form>
-
 
             <div className="mt-8 text-center">
 
               <p className="text-sm text-slate-500">
                 Don't have an account?{" "}
 
-                  <Link to="/register" className="text-indigo-600 font-semibold hover:text-indigo-700">
+                <Link
+                  to="/register"
+                  className="text-indigo-600 font-semibold hover:text-indigo-700"
+                >
                   Create account
-                  </Link>
+                </Link>
               </p>
 
             </div>
-
 
           </div>
 
@@ -308,3 +294,4 @@ function Login() {
 }
 
 export default Login
+```
